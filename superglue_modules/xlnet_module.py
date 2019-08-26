@@ -1,7 +1,7 @@
 import os
 
 import torch
-from pytorch_transformers.modeling import XLNetModel
+from pytorch_transformers import modeling_xlnet
 from torch import nn
 
 
