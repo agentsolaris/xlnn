@@ -38,8 +38,8 @@ def parse(jsonl_path, tokenizer, max_data_samples, max_sequence_length):
 
     labels = []
 
-    bert_token1_ids = []
-    bert_token2_ids = []
+    xlnet_token1_ids = []
+    xlnet_token2_ids = []
 
     # Check the maximum token length
     max_len = -1
@@ -100,8 +100,8 @@ def parse(jsonl_path, tokenizer, max_data_samples, max_sequence_length):
         if len(token2_ids) > max_len:
             max_len = len(token2_ids)
 
-        bert_token1_ids.append(torch.LongTensor(token1_ids))
-        bert_token2_ids.append(torch.LongTensor(token2_ids))
+        xlnet_token1_ids.append(torch.LongTensor(token1_ids))
+        xlnet_token2_ids.append(torch.LongTensor(token2_ids))
 
     labels = torch.from_numpy(np.array(labels))
 
@@ -114,8 +114,8 @@ def parse(jsonl_path, tokenizer, max_data_samples, max_sequence_length):
             "sentence2": sent2s,
             "choice1": choice1s,
             "choice2": choice2s,
-            "token1_ids": bert_token1_ids,
-            "token2_ids": bert_token2_ids,
+            "token1_ids": xlnet_token1_ids,
+            "token2_ids": xlnet_token2_ids,
         },
         Y_dict={"labels": labels},
     )
