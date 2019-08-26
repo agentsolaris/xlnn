@@ -66,7 +66,7 @@ def parse(jsonl_path, tokenizer, max_data_samples, max_sequence_length):
                 break
 
         # Convert to BERT manner
-        tokens = ["[CLS]"] + sent1_tokens + ["[SEP]"]
+        tokens =  sent1_tokens + ["[SEP]"] + ["[CLS]"] 
         token_segments = [0] * len(tokens)
 
         #tokens += sent2_tokens + ["[SEP]"]
