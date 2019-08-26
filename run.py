@@ -58,9 +58,9 @@ def add_application_args(parser):
     )
 
     parser.add_argument(
-        "--xlnet_model",
+        "--bert_model",
         type=str,
-        default="xlnet-large-cased",
+        default="bert-large-cased",
         help="Which pretrained BERT model to use",
     )
 
@@ -82,7 +82,7 @@ def add_application_args(parser):
         "--last_hidden_dropout_prob",
         type=float,
         default=0.0,
-        help="Dropout on last layer of xlnet.",
+        help="Dropout on last layer of bert.",
     )
 
     parser.add_argument(
@@ -142,13 +142,13 @@ def main(args):
             splits=["train", "valid", "test"],
             max_sequence_length=args.max_sequence_length,
             max_data_samples=args.max_data_samples,
-            tokenizer_name=args.xlnet_model,
+            tokenizer_name=args.bert_model,
             batch_size=args.batch_size,
         )
         dataloaders.extend(task_dataloaders)
 
         task = superglue_tasks.task_funcs[task_name](
-            args.xlnet_model, last_hidden_dropout_prob=args.last_hidden_dropout_prob
+            args.bert_model, last_hidden_dropout_prob=args.last_hidden_dropout_prob
         )
         tasks.append(task)
 

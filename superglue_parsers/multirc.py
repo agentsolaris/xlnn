@@ -87,9 +87,9 @@ def parse_from_rows(rows, tokenizer, max_sequence_length):
     # labels
     labels = []
 
-    xlnet_token_ids = []
-    xlnet_token_masks = []
-    xlnet_token_segments = []
+    bert_token_ids = []
+    bert_token_masks = []
+    bert_token_segments = []
 
     # Check the maximum token length
     max_len = -1
@@ -134,9 +134,9 @@ def parse_from_rows(rows, tokenizer, max_sequence_length):
         qids.append(qid)
         aids.append(aid)
 
-        xlnet_token_ids.append(torch.LongTensor(token_ids))
-        xlnet_token_masks.append(torch.LongTensor(token_masks))
-        xlnet_token_segments.append(torch.LongTensor(token_segments))
+        bert_token_ids.append(torch.LongTensor(token_ids))
+        bert_token_masks.append(torch.LongTensor(token_masks))
+        bert_token_segments.append(torch.LongTensor(token_segments))
 
     labels = torch.from_numpy(np.array(labels))
 
@@ -151,9 +151,9 @@ def parse_from_rows(rows, tokenizer, max_sequence_length):
             "para": paras,
             "question": questions,
             "answer": answers,
-            "token_ids": xlnet_token_ids,
-            "token_masks": xlnet_token_masks,
-            "token_segments": xlnet_token_segments,
+            "token_ids": bert_token_ids,
+            "token_masks": bert_token_masks,
+            "token_segments": bert_token_segments,
         },
         Y_dict={"labels": labels},
     )

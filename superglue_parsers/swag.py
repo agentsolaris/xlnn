@@ -44,10 +44,10 @@ def parse(csv_path, tokenizer, max_data_samples, max_sequence_length):
 
     labels = []
 
-    xlnet_token1_ids = []
-    xlnet_token2_ids = []
-    xlnet_token3_ids = []
-    xlnet_token4_ids = []
+    bert_token1_ids = []
+    bert_token2_ids = []
+    bert_token3_ids = []
+    bert_token4_ids = []
 
     # Check the maximum token length
     max_len = -1
@@ -81,7 +81,7 @@ def parse(csv_path, tokenizer, max_data_samples, max_sequence_length):
         choice4_tokens = tokenizer.tokenize(choice4)
 
         # Convert to BERT manner
-        xlnet_token1 = (
+        bert_token1 = (
             ["[CLS]"]
             + sent1_tokens
             + ["[SEP]"]
@@ -89,7 +89,7 @@ def parse(csv_path, tokenizer, max_data_samples, max_sequence_length):
             + choice1_tokens
             + ["[SEP]"]
         )
-        xlnet_token2 = (
+        bert_token2 = (
             ["[CLS]"]
             + sent1_tokens
             + ["[SEP]"]
@@ -97,7 +97,7 @@ def parse(csv_path, tokenizer, max_data_samples, max_sequence_length):
             + choice2_tokens
             + ["[SEP]"]
         )
-        xlnet_token3 = (
+        bert_token3 = (
             ["[CLS]"]
             + sent1_tokens
             + ["[SEP]"]
@@ -105,7 +105,7 @@ def parse(csv_path, tokenizer, max_data_samples, max_sequence_length):
             + choice3_tokens
             + ["[SEP]"]
         )
-        xlnet_token4 = (
+        bert_token4 = (
             ["[CLS]"]
             + sent1_tokens
             + ["[SEP]"]
@@ -114,10 +114,10 @@ def parse(csv_path, tokenizer, max_data_samples, max_sequence_length):
             + ["[SEP]"]
         )
 
-        token1_ids = tokenizer.convert_tokens_to_ids(xlnet_token1)
-        token2_ids = tokenizer.convert_tokens_to_ids(xlnet_token2)
-        token3_ids = tokenizer.convert_tokens_to_ids(xlnet_token3)
-        token4_ids = tokenizer.convert_tokens_to_ids(xlnet_token4)
+        token1_ids = tokenizer.convert_tokens_to_ids(bert_token1)
+        token2_ids = tokenizer.convert_tokens_to_ids(bert_token2)
+        token3_ids = tokenizer.convert_tokens_to_ids(bert_token3)
+        token4_ids = tokenizer.convert_tokens_to_ids(bert_token4)
 
         if len(token1_ids) > max_len:
             max_len = len(token1_ids)
@@ -128,10 +128,10 @@ def parse(csv_path, tokenizer, max_data_samples, max_sequence_length):
         if len(token4_ids) > max_len:
             max_len = len(token4_ids)
 
-        xlnet_token1_ids.append(torch.LongTensor(token1_ids))
-        xlnet_token2_ids.append(torch.LongTensor(token2_ids))
-        xlnet_token3_ids.append(torch.LongTensor(token3_ids))
-        xlnet_token4_ids.append(torch.LongTensor(token4_ids))
+        bert_token1_ids.append(torch.LongTensor(token1_ids))
+        bert_token2_ids.append(torch.LongTensor(token2_ids))
+        bert_token3_ids.append(torch.LongTensor(token3_ids))
+        bert_token4_ids.append(torch.LongTensor(token4_ids))
 
     labels = torch.from_numpy(np.array(labels))
 
@@ -146,10 +146,10 @@ def parse(csv_path, tokenizer, max_data_samples, max_sequence_length):
             "choice2": choice2s,
             "choice3": choice3s,
             "choice4": choice4s,
-            "token1_ids": xlnet_token1_ids,
-            "token2_ids": xlnet_token2_ids,
-            "token3_ids": xlnet_token3_ids,
-            "token4_ids": xlnet_token4_ids,
+            "token1_ids": bert_token1_ids,
+            "token2_ids": bert_token2_ids,
+            "token3_ids": bert_token3_ids,
+            "token4_ids": bert_token4_ids,
         },
         Y_dict={"labels": labels},
     )

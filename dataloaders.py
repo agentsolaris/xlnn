@@ -5,7 +5,7 @@ import superglue_parsers
 from task_config import SuperGLUE_TASK_SPLIT_MAPPING
 from tokenizer import get_tokenizer
 
-from pytorch_transformers import XLNetTokenizer
+from pytorch_pretrained_bert import BertTokenizer
 from snorkel.mtl.data import MultitaskDataLoader
 
 
@@ -22,7 +22,7 @@ def get_dataset(
     data_dir: str,
     task_name: str,
     split: str,
-    tokenizer: XLNetTokenizer,
+    tokenizer: BertTokenizer,
     max_data_samples: int,
     max_sequence_length: int,
 ):
@@ -38,7 +38,7 @@ def get_dataloaders(
     splits=["train", "valid", "test"],
     max_data_samples=None,
     max_sequence_length=256,
-    tokenizer_name="xlnet-base-cased",
+    tokenizer_name="bert-base-uncased",
     batch_size=16,
 ):
     """Load data and return dataloaders"""
