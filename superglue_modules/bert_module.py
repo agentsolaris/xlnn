@@ -2,9 +2,9 @@ import os
 
 import torch
 #from pytorch_transformers.file_utils import PYTORCH_PRETRAINED_BERT_CACHE, WEIGHTS_NAME, CONFIG_NAME
-from pytorch_transformers.modeling_bert import BertConfig, BertModel
+from pytorch_transformers.modeling_xlnet import XLNetConfig,XLNetModel
 from pytorch_transformers.optimization import AdamW, WarmupLinearSchedule
-from pytorch_transformers.tokenization_bert import BertTokenizer
+from pytorch_transformers.tokenization_xlnet import XLNetTokenizer 
 from torch import nn
 
 
@@ -16,7 +16,7 @@ class BertModule(nn.Module):
         if not os.path.exists(cache_dir):
             os.makedirs(cache_dir)
 
-        self.bert_model = BertModel.from_pretrained(
+        self.bert_model = XLNetModel.from_pretrained(
             bert_model_name, cache_dir=cache_dir
         )
 
