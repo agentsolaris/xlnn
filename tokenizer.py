@@ -1,6 +1,6 @@
 import logging
 
-from pytorch_transformers import XLNetTokenizer
+from pytorch_transformers import tokenization_xlnet
 
 logger = logging.getLogger(__name__)
 
