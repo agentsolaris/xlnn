@@ -2,12 +2,7 @@ import os
 
 import torch
 
-from pytorch_transformers.modeling_xlnet import (
-    XLNetConfig,
-    XLNetModel,
-    XLNetLMHeadModel,
-    # XLNetForSequenceClassification
-)
+from pytorch_transformers.modeling_xlnet import XLNetModel
 from torch import nn
 
 
