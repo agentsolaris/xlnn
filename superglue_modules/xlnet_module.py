@@ -1,6 +1,7 @@
 import os
 
 import torch
+
 from pytorch_transformers import *
 from torch import nn
 
@@ -12,10 +13,8 @@ class XLNetModule(nn.Module):
         # Create cache directory if not exists
         if not os.path.exists(cache_dir):
             os.makedirs(cache_dir)
-
-        self.xlnet_model = XLNetModel.from_pretrained(
-            'xlnet-base-cased'
-        )
+        xlnet_model = XLNetModel.from_pretrained('xlnet-large-cased')
+        self.xlnet_model = XLNetModel.from_pretrained('xlnet-large-cased')
 
     def forward(self, token_ids, token_type_ids=None, attention_mask=None):
         encoded_layers, pooled_output = self.xlnet_model(
