@@ -1,7 +1,7 @@
 import os
 
 import torch
-from pytorch_transformers import modeling_xlnet
+from pytorch_transformers import *
 from torch import nn
 
 
@@ -14,7 +14,7 @@ class XLNetModule(nn.Module):
             os.makedirs(cache_dir)
 
         self.xlnet_model = XLNetModel.from_pretrained(
-            xlnet_model_name, cache_dir=cache_dir
+            'xlnet-base-cased'
         )
 
     def forward(self, token_ids, token_type_ids=None, attention_mask=None):
