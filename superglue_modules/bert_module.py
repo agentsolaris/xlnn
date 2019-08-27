@@ -27,16 +27,8 @@ class BertModule(nn.Module):
         return encoded_layers, pooled_output
 
 
-#class BertLastCLSModule(nn.Module):
-#   def __init__(self, dropout_prob=0.0):
-#       super().__init__()
-#       self.dropout = nn.Dropout(dropout_prob)
-#
-#   def forward(self, input):
-#       last_hidden = input[:,-1][:, 0, :]
-#       out = self.dropout(last_hidden)
-#       return out
-#
+
+
 
 class BertContactLastCLSWithTwoTokensModule(nn.Module):
     def __init__(self):
