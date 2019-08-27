@@ -31,9 +31,14 @@ class BertLastCLSModule(nn.Module):
     def __init__(self, dropout_prob=0.0):
         super().__init__()
         self.dropout = nn.Dropout(dropout_prob)
+        self.bert_model = XLNetModel.from_pretrained(
+            bert_model_name
+        )
 
     def forward(self, input):
-        last_hidden = input[:,-1][:, 0, :]
+        outputs = model(input)
+        last_hidden = outputs[0]  # The last hidden-state is the first element of the output tuple
+        #last_hidden = input[:,-1][:, 0, :]
         out = self.dropout(last_hidden)
         return out
 
