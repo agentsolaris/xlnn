@@ -1,7 +1,5 @@
 import os
 
-import logging 
-
 import torch
 #from pytorch_transformers.file_utils import PYTORCH_PRETRAINED_BERT_CACHE, WEIGHTS_NAME, CONFIG_NAME
 from pytorch_transformers.modeling_xlnet import XLNetConfig,XLNetModel
@@ -9,13 +7,7 @@ from pytorch_transformers.optimization import AdamW, WarmupLinearSchedule
 from pytorch_transformers.tokenization_xlnet import XLNetTokenizer 
 from torch import nn
 
-logging.basicConfig(filename="newfile.log", 
-                    format='%(asctime)s %(message)s', 
-                    filemode='w') 
-logger=logging.getLogger() 
-  
-#Setting the threshold of logger to DEBUG 
-logger.setLevel(logging.DEBUG) 
+
 class BertModule(nn.Module):
     def __init__(self, bert_model_name, cache_dir="./cache/"):
         super().__init__()
@@ -41,7 +33,6 @@ class BertLastCLSModule(nn.Module):
         self.dropout = nn.Dropout(dropout_prob)
 
     def forward(self, input):
-        logger.debug("Harmless debug Message") 
         last_hidden = input[-1][:, 0, :]
         out = self.dropout(last_hidden)
         return out
