@@ -33,7 +33,7 @@ class BertLastCLSModule(nn.Module):
         self.dropout = nn.Dropout(dropout_prob)
 
     def forward(self, input):
-        last_hidden = input[0]
+        last_hidden = input
     
         out = self.dropout(last_hidden)
         return out
