@@ -33,12 +33,8 @@ class BertLastCLSModule(nn.Module):
         self.dropout = nn.Dropout(dropout_prob)
 
     def forward(self, input):
-<<<<<<< HEAD
         last_hidden = input[-1][:, 0, :]
-=======
-        last_hidden = input[0]
-        #last_hidden = input[-1][:, 0, :]
->>>>>>> parent of 88e3695... Update bert_module.py
+    
         out = self.dropout(last_hidden)
         return out
 
