@@ -33,7 +33,7 @@ class BertLastCLSModule(nn.Module):
         self.dropout = nn.Dropout(dropout_prob)
 
     def forward(self, input):
-        file1 = open("debug.txt","a") 
+        file1 = open("/content/xlnn/superglue_modules/debug.txt","a") 
         file1.write(input)
         last_hidden = input[0]
     
