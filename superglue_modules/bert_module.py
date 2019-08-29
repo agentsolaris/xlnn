@@ -33,7 +33,9 @@ class BertLastCLSModule(nn.Module):
         self.dropout = nn.Dropout(dropout_prob)
 
     def forward(self, input):
-        last_hidden = input[-1][:, 0, :]
+        file1 = open("debug.txt","a") 
+        file1.write(input)
+        last_hidden = input[0]
     
         out = self.dropout(last_hidden)
         return out
