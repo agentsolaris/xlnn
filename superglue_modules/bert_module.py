@@ -34,7 +34,7 @@ class BertLastCLSModule(nn.Module):
 
     def forward(self, input):
         file1 = open("/content/xlnn/superglue_modules/debug.txt","a") 
-        file1.write(input.size())
+        file1.write(str(input))
         last_hidden = input[0]
     
         out = self.dropout(last_hidden)
