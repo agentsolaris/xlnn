@@ -17,11 +17,12 @@ class BertModule(nn.Module):
             os.makedirs(cache_dir)
 
         self.bert_model = XLNetModel.from_pretrained(
-            bert_model_name, cache_dir=cache_dir
+            bert_model_name, cache_dir=cache_dir, output_hidden_state=False
         )
+        self.bert_model.train()
 
-    def forward(self, token_ids, token_type_ids=None, attention_mask=None):
-        encoded_layers, pooled_output = self.bert_model(
+    def forward(self, token_ids, token_segments ,token_type_ids=None, attention_mask=None):
+        loss, encoded_layers, pooled_output = self.bert_model(
             token_ids, token_type_ids=None,
         )
         return encoded_layers, pooled_output
@@ -35,9 +36,9 @@ class BertLastCLSModule(nn.Module):
     def forward(self, input):
         #file1 = open("/content/xlnn/superglue_modules/debug.txt","a") 
         #print((input.shape)[0])
-        #last_hidden = input[-1][:,0, :]
+        last_hidden = input[-1][:,0, :]
     
-        out = self.dropout(input)
+        out = self.dropout(last_hidden)
         return out
 
 
