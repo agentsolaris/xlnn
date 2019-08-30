@@ -21,8 +21,8 @@ class BertModule(nn.Module):
         )
 
     def forward(self, token_ids, token_type_ids=None, attention_mask=None):
-        encoded_layers, pooled_output = self.bert_model(
-            token_ids, token_type_ids, attention_mask
+        loss, encoded_layers, pooled_output = self.bert_model(
+            token_ids, token_type_ids=None,
         )
         return encoded_layers, pooled_output
 
@@ -47,7 +47,7 @@ class BertContactLastCLSWithTwoTokensModule(nn.Module):
 
     def forward(self, input, idx1, idx2):
         last_layer = input[-1]
-        last_cls = last_layer[ 0, :]
+        last_cls = last_layer[ :,0, :]
         idx1 = idx1.unsqueeze(-1).unsqueeze(-1).expand([-1, -1, last_layer.size(-1)])
         idx2 = idx2.unsqueeze(-1).unsqueeze(-1).expand([-1, -1, last_layer.size(-1)])
         token1_emb = last_layer.gather(dim=1, index=idx1).squeeze(dim=1)
