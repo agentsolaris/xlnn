@@ -17,7 +17,7 @@ class BertModule(nn.Module):
             os.makedirs(cache_dir)
 
         self.bert_model = XLNetModel.from_pretrained(
-            bert_model_name, cache_dir=cache_dir, output_hidden_state=False
+            bert_model_name, cache_dir=cache_dir
         )
         self.bert_model.train()
 
