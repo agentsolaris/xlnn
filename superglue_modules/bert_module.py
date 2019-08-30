@@ -21,7 +21,7 @@ class BertModule(nn.Module):
         )
 
     def forward(self, token_ids, token_type_ids=None, attention_mask=None):
-        loss, encoded_layers, pooled_output = self.bert_model(
+        encoded_layers, pooled_output = self.bert_model(
             token_ids, token_type_ids=None,
         )
         return encoded_layers, pooled_output
