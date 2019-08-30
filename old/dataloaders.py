@@ -5,7 +5,7 @@ import superglue_parsers
 from task_config import SuperGLUE_TASK_SPLIT_MAPPING
 from tokenizer import get_tokenizer
 
-from pytorch_transformers import XLNetTokenizer
+from pytorch_transformers.tokenization_xlnet import XLNetTokenizer
 from snorkel.mtl.data import MultitaskDataLoader
 
 
@@ -38,7 +38,7 @@ def get_dataloaders(
     splits=["train", "valid", "test"],
     max_data_samples=None,
     max_sequence_length=256,
-    tokenizer_name="xlnet-base-uncased",
+    tokenizer_name="xlnet-base-cased",
     batch_size=16,
 ):
     """Load data and return dataloaders"""
