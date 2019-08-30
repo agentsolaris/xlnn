@@ -35,9 +35,9 @@ class BertLastCLSModule(nn.Module):
     def forward(self, input):
         #file1 = open("/content/xlnn/superglue_modules/debug.txt","a") 
         #print((input.shape)[0])
-        last_hidden = input[-1][:,0, :]
+        #last_hidden = input[-1][:,0, :]
     
-        out = self.dropout(last_hidden)
+        out = self.dropout(input)
         return out
 
 
