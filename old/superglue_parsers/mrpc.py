@@ -14,7 +14,7 @@ sys.path.append("..")  # Adds higher directory to python modules path.
 
 logger = logging.getLogger(__name__)
 
-TASK_NAME = "SST"
+TASK_NAME = "MRPC"
 
 
 def parse(jsonl_path, tokenizer, max_data_samples, max_sequence_length):
@@ -44,33 +44,37 @@ def parse(jsonl_path, tokenizer, max_data_samples, max_sequence_length):
 
     for row in rows:
         #index = row["idx"]
-        sentence1 = row["sentence"]
-        #sentence2 = row["#2 String"]
-        label = row["label"] if "label" in row else 1
+        sentence1 = row["#1 String"]
+        sentence2 = row["#2 String"]
+        label = row["Quality"] if "Quality" in row else True
 
         sentence1s.append(sentence1)
-        #sentence2s.append(sentence2)
+        sentence2s.append(sentence2)
         labels.append(SuperGLUE_LABEL_MAPPING[TASK_NAME][label])
 
         # Tokenize sentences
         sent1_tokens = tokenizer.tokenize(sentence1)
-        #sent2_tokens = tokenizer.tokenize(sentence2)
+        sent2_tokens = tokenizer.tokenize(sentence2)
 
-        if len(sent1_tokens) > max_len:
-            max_len = len(sent1_tokens)
+        if len(sent1_tokens) + len(sent2_tokens) > max_len:
+            max_len = len(sent1_tokens) + len(sent2_tokens)
 
         while True:
-            total_length = len(sent1_tokens) 
+            total_length = len(sent1_tokens) + len(sent2_tokens)
             # Account for [CLS], [SEP], [SEP] with "- 3"
             if total_length <= max_sequence_length - 3:
                 break
+            if len(sent1_tokens) > len(sent2_tokens):
+                sent1_tokens.pop()
+            else:
+                sent2_tokens.pop()
 
         # Convert to BERT manner
         tokens = ["[CLS]"] + sent1_tokens + ["[SEP]"]
         token_segments = [0] * len(tokens)
 
-        #tokens += sent2_tokens + ["[SEP]"]
-        #token_segments += [1] * (len(sent2_tokens) + 1)
+        tokens += sent2_tokens + ["[SEP]"]
+        token_segments += [1] * (len(sent2_tokens) + 1)
 
         token_ids = tokenizer.convert_tokens_to_ids(tokens)
 
@@ -88,12 +92,11 @@ def parse(jsonl_path, tokenizer, max_data_samples, max_sequence_length):
     return MultitaskDataset(
         name="SuperGLUE",
         X_dict={
-            "sentence": sentence1s,
-            #"#2 String": sentence2s,
+            "#1 String": sentence1s,
+            "#2 String": sentence2s,
             "token_ids": bert_token_ids,
             "token_masks": bert_token_masks,
             "token_segments": bert_token_segments,
         },
         Y_dict={"labels": labels},
     )
-

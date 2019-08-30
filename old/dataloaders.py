@@ -5,7 +5,7 @@ import superglue_parsers
 from task_config import SuperGLUE_TASK_SPLIT_MAPPING
 from tokenizer import get_tokenizer
 
-from pytorch_pretrained_bert import XLNetTokenizer
+from pytorch_transformers import XLNetTokenizer
 from snorkel.mtl.data import MultitaskDataLoader
 
 

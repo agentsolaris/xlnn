@@ -14,16 +14,24 @@ from . import utils
 sys.path.append("..")  # Adds higher directory to python modules path.
 
 
+TASK_NAME = "CB"
 
-TASK_NAME = "MRPC"
+# custom_metric_funcs #################
+
+
 def macro_f1(golds, preds, probs):
     return metric_score(golds, preds, probs, metric="f1")
+
 
 def accuracy_macro_f1(golds, preds, probs):
     f1 = macro_f1(golds, preds, probs)
     accuracy = metric_score(golds, preds, probs, metric="accuracy")
 
     return (f1 + accuracy) / 2
+
+
+#########################################
+
 
 def build_task(bert_model_name, last_hidden_dropout_prob=0.0):
 
@@ -61,7 +69,6 @@ def build_task(bert_model_name, last_hidden_dropout_prob=0.0):
         task_flow=[
             Operation(
                 name=f"{TASK_NAME}_bert_module",
-                
                 module_name="bert_module",
                 inputs=[
                     ("_input_", "token_ids"),
@@ -86,4 +93,3 @@ def build_task(bert_model_name, last_hidden_dropout_prob=0.0):
     )
 
     return task
-
