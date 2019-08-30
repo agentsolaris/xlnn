@@ -3,7 +3,7 @@ import os
 import torch
 from pytorch_transformers.modeling_bert import XLNetConfig,XLNetModel
 from pytorch_transformers.optimization import AdamW, WarmupLinearSchedule
-from pytorch_transformers import XLNetTokenizer 
+from pytorch_transformers.tokenization_xlnet import XLNetTokenizer 
 from torch import nn
 
 

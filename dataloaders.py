@@ -38,7 +38,7 @@ def get_dataloaders(
     splits=["train", "valid", "test"],
     max_data_samples=None,
     max_sequence_length=256,
-    tokenizer_name="xlnet-base-uncased",
+    tokenizer_name="xlnet-base-cased",
     batch_size=16,
 ):
     """Load data and return dataloaders"""
