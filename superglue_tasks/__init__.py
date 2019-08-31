@@ -10,5 +10,5 @@ task_funcs = {
     "SWAG": swag.build_task,
     "MRPC": mrpc.build_task,
     "SST": sst.build_task,
-    "QNLI": sst.build_task,
+    "QNLI": qnli.build_task,
 }
