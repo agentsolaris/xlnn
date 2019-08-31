@@ -1,4 +1,4 @@
-SuperGLUE_TASK_NAMES = ["CB", "COPA", "MultiRC", "RTE", "WiC", "WSC", "MRPC","SST"]
+SuperGLUE_TASK_NAMES = ["CB", "COPA", "MultiRC", "RTE", "WiC", "WSC", "MRPC","SST", "QNLI"]
 
 SuperGLUE_TASK_SPLIT_MAPPING = {
     "CB": {"train": "train.jsonl", "valid": "val.jsonl", "test": "test.jsonl"},
@@ -10,6 +10,7 @@ SuperGLUE_TASK_SPLIT_MAPPING = {
     "WSC": {"train": "train.jsonl", "valid": "val.jsonl", "test": "test.jsonl"},
     "SWAG": {"train": "train.csv", "valid": "val.csv", "test": "test.csv"},
     "SST": {"train": "train.jsonl", "valid": "val.jsonl", "test": "test.jsonl"},
+    "QNLI": {"train": "train.jsonl", "valid": "val.jsonl", "test": "test.jsonl"},
 }
 
 SuperGLUE_LABEL_MAPPING = {
@@ -24,6 +25,7 @@ SuperGLUE_LABEL_MAPPING = {
     "MultiRC": {True: 1, False: 2},
     "SWAG": {0: 1, 1: 2, 2: 3, 3: 4},
     "SST": {0: 1, 1: 2},
+    "QNLI": {"entailment": 1, "not_entailment": 2},
 }
 
 SuperGLUE_LABEL_INVERSE = {}
@@ -40,4 +42,5 @@ SuperGLUE_TASK_METRIC_MAPPING = {
     "WSC": ["accuracy"],
     "SWAG": ["accuracy"],
     "SST": ["accuracy"],
+    "QNLI": ["accuracy"],
 }
