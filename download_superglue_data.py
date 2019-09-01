@@ -16,7 +16,7 @@ import tempfile
 import urllib.request
 import zipfile
 
-TASKS = ["CB", "COPA", "MultiRC", "RTE", "WiC", "WSC", "diagnostic", "MRPC", "SST"]
+TASKS = ["CB", "COPA", "MultiRC", "RTE", "WiC", "WSC", "diagnostic", "MRPC", "SST","QNLI"]
 TASK2PATH = {
     "CB": "https://dl.fbaipublicfiles.com/glue/superglue/data/CB.zip",
     "COPA": "https://dl.fbaipublicfiles.com/glue/superglue/data/COPA.zip",
@@ -26,6 +26,7 @@ TASK2PATH = {
     "WSC": "https://dl.fbaipublicfiles.com/glue/superglue/data/WSC.zip",
     "MRPC": "https://www.dropbox.com/s/f0hnrwtttwqku8u/MRPCC.zip?dl=1",
     "SST": "https://www.dropbox.com/s/yhaba2469yzel0o/SST.zip?dl=1",
+    "QNLI": "https://www.dropbox.com/s/p1iqot8t0y00ae4/qnli.zip?dl=1"
     "diagnostic": "https://www.dropbox.com/s/ju7d95ifb072q9f/diagnostic-full.tsv?dl=1",
 }
 
