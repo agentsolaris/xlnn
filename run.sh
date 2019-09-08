@@ -24,7 +24,7 @@ python run.py \
     --grad_clip 5.0 \
     --warmup_percentage 0.0 \
     --counter_unit epochs \
-    --evaluation_freq 0.25 \
+    --evaluation_freq 0.5 \
     --logging 1 \
     --checkpointing 1 \
     --checkpoint_metric ${TASK}/SuperGLUE/valid/${METRIC}:max \
