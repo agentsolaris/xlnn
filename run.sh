@@ -31,4 +31,5 @@ python run.py \
     --bert_model xlnet-base-cased \
     --batch_size 8 \
     --max_sequence_length 256 \
-    --dataparallel 0
+    --dataparallel 0 \
+    --slice_dict '{"MRPC": ["slice_not", "slice_uncertain"]}'
