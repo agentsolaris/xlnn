@@ -32,4 +32,4 @@ python run.py \
     --batch_size 8 \
     --max_sequence_length 256 \
     --dataparallel 0 \
-    --slice_dict '{"MRPC": ["slice_not", "slice_uncertain"]}'
+    --slice_dict '{"MRPC": ["slice_not"]}'
