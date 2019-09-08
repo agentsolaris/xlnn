@@ -18,7 +18,7 @@ python run.py \
     --log_root ${LOGPATH} \
     --seed ${SEED} \
     --device ${GPU} \
-    --n_epochs 10 \
+    --n_epochs 6 \
     --optimizer adam \
     --lr 1e-5 \
     --grad_clip 5.0 \
@@ -28,7 +28,7 @@ python run.py \
     --logging 1 \
     --checkpointing 1 \
     --checkpoint_metric ${TASK}/SuperGLUE/valid/${METRIC}:max \
-    --bert_model bert-large-cased \
-    --batch_size 4 \
+    --bert_model xlnet-base-cased \
+    --batch_size 8 \
     --max_sequence_length 256 \
     --dataparallel 0
