@@ -11,7 +11,7 @@ SuperGLUE_TASK_SPLIT_MAPPING = {
     "SWAG": {"train": "train.csv", "valid": "val.csv", "test": "test.csv"},
     "SST": {"train": "train.jsonl", "valid": "val.jsonl", "test": "test.jsonl"},
     "QNLI": {"train": "train.jsonl", "valid": "val.jsonl", "test": "test.jsonl"},
-    "WNLI": {"train": "train.jsonl", "valid": "val.jsonl", "test": "test.jsonl"},
+    "WNLI": {"train": "train.jsonl", "valid": "valid.jsonl", "test": "test.jsonl"},
 
 }
 
