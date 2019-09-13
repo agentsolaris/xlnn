@@ -18,12 +18,12 @@ install:
   - pip install -U -r requirements.txt
 
 script:
-  - python run.py --task CB --n_epochs 1 --batch_size 2 --max_data_samples 4 --bert_model bert-base-cased --checkpointing 0
-  - python run.py --task COPA --n_epochs 1 --batch_size 2 --max_data_samples 4 --bert_model bert-base-cased --checkpointing 0
-  - python run.py --task MultiRC --n_epochs 1 --batch_size 2 --max_data_samples 4 --bert_model bert-base-cased --checkpointing 0
-  - python run.py --task RTE --n_epochs 1 --batch_size 2 --max_data_samples 4 --bert_model bert-base-cased --checkpointing 0
-  - python run.py --task WiC --n_epochs 1 --batch_size 2 --max_data_samples 4 --bert_model bert-base-cased --checkpointing 0
-  - python run.py --task WSC --n_epochs 1 --batch_size 2 --max_data_samples 4 --bert_model bert-base-cased --checkpointing 0
+  - python run.py --task CB --n_epochs 1 --batch_size 2 --max_data_samples 4 --xlnet_model bert-base-cased --checkpointing 0
+  - python run.py --task COPA --n_epochs 1 --batch_size 2 --max_data_samples 4 --xlnet_model bert-base-cased --checkpointing 0
+  - python run.py --task MultiRC --n_epochs 1 --batch_size 2 --max_data_samples 4 --xlnet_model bert-base-cased --checkpointing 0
+  - python run.py --task RTE --n_epochs 1 --batch_size 2 --max_data_samples 4 --xlnet_model bert-base-cased --checkpointing 0
+  - python run.py --task WiC --n_epochs 1 --batch_size 2 --max_data_samples 4 --xlnet_model bert-base-cased --checkpointing 0
+  - python run.py --task WSC --n_epochs 1 --batch_size 2 --max_data_samples 4 --xlnet_model bert-base-cased --checkpointing 0
 
 notifications:
   email:

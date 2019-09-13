@@ -94,10 +94,10 @@ def parse(jsonl_path, tokenizer, max_data_samples, max_sequence_length):
     token1_idxs = []
     token2_idxs = []
 
-    bert_tokens = []
-    bert_token_ids = []
-    bert_token_masks = []
-    bert_token_segments = []
+    xlnet_tokens = []
+    xlnet_token_ids = []
+    xlnet_token_masks = []
+    xlnet_token_segments = []
 
     # Check the maximum token length
     max_len = -1
@@ -120,25 +120,25 @@ def parse(jsonl_path, tokenizer, max_data_samples, max_sequence_length):
         assert span2_char_index is not None, f"Check example {id} in {jsonl_path}"
 
         # Tokenize sentences
-        bert_tokens_sub1 = tokenizer.tokenize(
+        xlnet_tokens_sub1 = tokenizer.tokenize(
             text[: min(span1_char_index[0], span2_char_index[0])]
         )
 
         if span1_char_index[0] < span2_char_index[0]:
-            bert_tokens_sub2 = tokenizer.tokenize(
+            xlnet_tokens_sub2 = tokenizer.tokenize(
                 text[span1_char_index[0] : span1_char_index[1]]
             )
             token1_idx = [
-                len(bert_tokens_sub1) + 1,
-                len(bert_tokens_sub1) + len(bert_tokens_sub2),
+                len(xlnet_tokens_sub1) + 1,
+                len(xlnet_tokens_sub1) + len(xlnet_tokens_sub2),
             ]
         else:
-            bert_tokens_sub2 = tokenizer.tokenize(
+            xlnet_tokens_sub2 = tokenizer.tokenize(
                 text[span2_char_index[0] : span2_char_index[1]]
             )
             token2_idx = [
-                len(bert_tokens_sub1) + 1,
-                len(bert_tokens_sub1) + len(bert_tokens_sub2),
+                len(xlnet_tokens_sub1) + 1,
+                len(xlnet_tokens_sub1) + len(xlnet_tokens_sub2),
             ]
 
         sub3_st = (
@@ -152,36 +152,36 @@ def parse(jsonl_path, tokenizer, max_data_samples, max_sequence_length):
             else span2_char_index[0]
         )
 
-        bert_tokens_sub3 = tokenizer.tokenize(text[sub3_st:sub3_ed])
+        xlnet_tokens_sub3 = tokenizer.tokenize(text[sub3_st:sub3_ed])
         if span1_char_index[0] < span2_char_index[0]:
-            bert_tokens_sub4 = tokenizer.tokenize(
+            xlnet_tokens_sub4 = tokenizer.tokenize(
                 text[span2_char_index[0] : span2_char_index[1]]
             )
             cur_len = (
-                len(bert_tokens_sub1) + len(bert_tokens_sub2) + len(bert_tokens_sub3)
+                len(xlnet_tokens_sub1) + len(xlnet_tokens_sub2) + len(xlnet_tokens_sub3)
             )
-            token2_idx = [cur_len + 1, cur_len + len(bert_tokens_sub4)]
+            token2_idx = [cur_len + 1, cur_len + len(xlnet_tokens_sub4)]
         else:
-            bert_tokens_sub4 = tokenizer.tokenize(
+            xlnet_tokens_sub4 = tokenizer.tokenize(
                 text[span1_char_index[0] : span1_char_index[1]]
             )
             cur_len = (
-                len(bert_tokens_sub1) + len(bert_tokens_sub2) + len(bert_tokens_sub3)
+                len(xlnet_tokens_sub1) + len(xlnet_tokens_sub2) + len(xlnet_tokens_sub3)
             )
-            token1_idx = [cur_len + 1, cur_len + len(bert_tokens_sub4)]
+            token1_idx = [cur_len + 1, cur_len + len(xlnet_tokens_sub4)]
 
         if span1_char_index[0] < span2_char_index[0]:
-            bert_tokens_sub5 = tokenizer.tokenize(text[span2_char_index[1] :])
+            xlnet_tokens_sub5 = tokenizer.tokenize(text[span2_char_index[1] :])
         else:
-            bert_tokens_sub5 = tokenizer.tokenize(text[span1_char_index[1] :])
+            xlnet_tokens_sub5 = tokenizer.tokenize(text[span1_char_index[1] :])
 
         tokens = (
             ["[CLS]"]
-            + bert_tokens_sub1
-            + bert_tokens_sub2
-            + bert_tokens_sub3
-            + bert_tokens_sub4
-            + bert_tokens_sub5
+            + xlnet_tokens_sub1
+            + xlnet_tokens_sub2
+            + xlnet_tokens_sub3
+            + xlnet_tokens_sub4
+            + xlnet_tokens_sub5
             + ["[SEP]"]
         )
 
@@ -204,10 +204,10 @@ def parse(jsonl_path, tokenizer, max_data_samples, max_sequence_length):
         span2_idxs.append(span2_index)
         labels.append(SuperGLUE_LABEL_MAPPING[TASK_NAME][label])
 
-        bert_tokens.append(tokens)
-        bert_token_ids.append(torch.LongTensor(token_ids))
-        bert_token_masks.append(torch.LongTensor(token_masks))
-        bert_token_segments.append(torch.LongTensor(token_segments))
+        xlnet_tokens.append(tokens)
+        xlnet_token_ids.append(torch.LongTensor(token_ids))
+        xlnet_token_masks.append(torch.LongTensor(token_masks))
+        xlnet_token_segments.append(torch.LongTensor(token_segments))
 
     token1_idxs = torch.from_numpy(np.array(token1_idxs))
     token2_idxs = torch.from_numpy(np.array(token2_idxs))
@@ -226,10 +226,10 @@ def parse(jsonl_path, tokenizer, max_data_samples, max_sequence_length):
             "span2_idx": span2_idxs,
             "token1_idx": token1_idxs,
             "token2_idx": token2_idxs,
-            "tokens": bert_tokens,
-            "token_ids": bert_token_ids,
-            "token_masks": bert_token_masks,
-            "token_segments": bert_token_segments,
+            "tokens": xlnet_tokens,
+            "token_ids": xlnet_token_ids,
+            "token_masks": xlnet_token_masks,
+            "token_segments": xlnet_token_segments,
         },
         Y_dict={"labels": labels},
     )

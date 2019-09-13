@@ -28,7 +28,7 @@ python run.py \
     --logging 1 \
     --checkpointing 1 \
     --checkpoint_metric ${TASK}/SuperGLUE/valid/${METRIC}:max \
-    --bert_model xlnet-large-cased \
+    --xlnet_model xlnet-base-cased \
     --batch_size 8 \
     --max_sequence_length 256 \
     --dataparallel 0 

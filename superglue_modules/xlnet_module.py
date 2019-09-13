@@ -7,21 +7,21 @@ from pytorch_transformers.tokenization_xlnet import XLNetTokenizer
 from torch import nn
 
 
-class BertModule(nn.Module):
-    def __init__(self, bert_model_name, cache_dir="./cache/"):
+class XLNetModule(nn.Module):
+    def __init__(self, xlnet_model_name, cache_dir="./cache/"):
         super().__init__()
 
         # Create cache directory if not exists
         if not os.path.exists(cache_dir):
             os.makedirs(cache_dir)
 
-        self.bert_model = XLNetModel.from_pretrained(
-            bert_model_name, cache_dir=cache_dir, output_hidden_states=True
+        self.xlnet_model = XLNetModel.from_pretrained(
+            xlnet_model_name, cache_dir=cache_dir, output_hidden_states=True
         )
-        self.bert_model.train()
+        self.xlnet_model.train()
 
     def forward(self, token_ids, token_segments,token_type_ids=None, attention_mask=None):
-        loss,  pooled_output, encoded_layers = self.bert_model(
+        loss,  pooled_output, encoded_layers = self.xlnet_model(
             token_ids, token_type_ids=None
         )
         #pooled_output = self.dropout(pooled_output)
@@ -30,7 +30,7 @@ class BertModule(nn.Module):
         
 
 
-class BertLastCLSModule(nn.Module):
+class XLNetLastCLSModule(nn.Module):
     def __init__(self, dropout_prob=0.0):
         super().__init__()
         self.dropout = nn.Dropout(dropout_prob)
@@ -41,7 +41,7 @@ class BertLastCLSModule(nn.Module):
         return out
 
 
-class BertContactLastCLSWithTwoTokensModule(nn.Module):
+class XLNetContactLastCLSWithTwoTokensModule(nn.Module):
     def __init__(self):
         super().__init__()
 
