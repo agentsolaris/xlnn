@@ -53,7 +53,7 @@ def get_gule_task(task_names, xlnet_model_name):
         #loss_fn = partial(ce_loss, f"{task_name}_pred_head")
         #output_fn = partial(utils.output, f"{task_name}_pred_head")
 
-        task = EmmentalTask(
+        task = Task(
             name=task_name,
             module_pool=nn.ModuleDict(
                 {
