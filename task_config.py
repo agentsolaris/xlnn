@@ -1,101 +1,50 @@
-GLUE_TASK_NAMES = [
-    "CoLA",
-    "MNLI",
-    "MRPC",
-    "QNLI",
-    "QQP",
-    "RTE",
-    "SNLI",
-    "SST-2",
-    "STS-B",
-    "WNLI",
-]
+SuperGLUE_TASK_NAMES = ["CB", "COPA", "MultiRC", "RTE", "WiC", "WSC", "MRPC","SST", "QNLI","WNLI"]
 
-SPLIT_MAPPING = {
-    "CoLA": {"train": "train.tsv", "valid": "dev.tsv", "test": "test.tsv"},
-    "MNLI": {
-        "train": "train.tsv",
-        "valid": "dev_matched.tsv",
-        "test": "test_matched.tsv",
-    },
-    "MNLI_matched": {
-        "train": "train.tsv",
-        "valid": "dev_matched.tsv",
-        "test": "test_matched.tsv",
-    },
-    "MNLI_unmatched": {
-        "train": "train.tsv",
-        "valid": "dev_mismatched.tsv",
-        "test": "test_mismatched.tsv",
-    },
-    "MRPC": {"train": "train.tsv", "valid": "dev.tsv", "test": "test.tsv"},
-    "QNLI": {"train": "train.tsv", "valid": "dev.tsv", "test": "test.tsv"},
-    "QQP": {"train": "train.tsv", "valid": "dev.tsv", "test": "test.tsv"},
-    "RTE": {"train": "train.tsv", "valid": "dev.tsv", "test": "test.tsv"},
-    "SNLI": {"train": "train.tsv", "valid": "dev.tsv", "test": "test.tsv"},
-    "SST-2": {"train": "train.tsv", "valid": "dev.tsv", "test": "test.tsv"},
-    "STS-B": {"train": "train.tsv", "valid": "dev.tsv", "test": "test.tsv"},
-    "WNLI": {"train": "train.tsv", "valid": "dev.tsv", "test": "test.tsv"},
+SuperGLUE_TASK_SPLIT_MAPPING = {
+    "CB": {"train": "train.jsonl", "valid": "val.jsonl", "test": "test.jsonl"},
+    "COPA": {"train": "train.jsonl", "valid": "val.jsonl", "test": "test.jsonl"},
+    "MultiRC": {"train": "train.jsonl", "valid": "val.jsonl", "test": "test.jsonl"},
+    "MRPC": {"train": "train.jsonl", "valid": "val.jsonl", "test": "test.jsonl"},
+    "RTE": {"train": "train.jsonl", "valid": "val.jsonl", "test": "test.jsonl"},
+    "WiC": {"train": "train.jsonl", "valid": "val.jsonl", "test": "test.jsonl"},
+    "WSC": {"train": "train.jsonl", "valid": "val.jsonl", "test": "test.jsonl"},
+    "SWAG": {"train": "train.csv", "valid": "val.csv", "test": "test.csv"},
+    "SST": {"train": "train.jsonl", "valid": "val.jsonl", "test": "test.jsonl"},
+    "QNLI": {"train": "train.jsonl", "valid": "val.jsonl", "test": "test.jsonl"},
+    "WNLI": {"train": "train.jsonl", "valid": "valid.jsonl", "test": "test.jsonl"},
+
 }
 
-INDEX_MAPPING = {
-    # each one contains three values:
-    # sentence 1 index, sentence 2 index, label index, -1 means abstain
-    "CoLA": {"train": [3, -1, 1], "valid": [3, -1, 1], "test": [1, -1, -1]},
-    "MNLI": {"train": [8, 9, 11], "valid": [8, 9, 15], "test": [8, 9, -1]},
-    "MNLI_matched": {"train": [8, 9, 11], "valid": [8, 9, 15], "test": [8, 9, -1]},
-    "MNLI_unmatched": {"train": [8, 9, 11], "valid": [8, 9, 15], "test": [8, 9, -1]},
-    "MRPC": {"train": [3, 4, 0], "valid": [3, 4, 0], "test": [3, 4, -1]},
-    "QNLI": {"train": [1, 2, 3], "valid": [1, 2, 3], "test": [1, 2, -1]},
-    "QQP": {"train": [3, 4, 5], "valid": [3, 4, 5], "test": [1, 2, -1]},
-    "RTE": {"train": [1, 2, 3], "valid": [1, 2, 3], "test": [1, 2, -1]},
-    "SNLI": {"train": [7, 8, 10], "valid": [7, 8, 14], "test": [7, 8, 14]},
-    "SST-2": {"train": [0, -1, 1], "valid": [0, -1, 1], "test": [1, -1, -1]},
-    "STS-B": {"train": [7, 8, 9], "valid": [7, 8, 9], "test": [7, 8, -1]},
-    "WNLI": {"train": [1, 2, 3], "valid": [1, 2, 3], "test": [1, 2, -1]},
-}
-
-SKIPPING_HEADER_MAPPING = {
-    "CoLA": {"train": 0, "valid": 0, "test": 1},
-    "MNLI": {"train": 1, "valid": 1, "test": 1},
-    "MNLI_matched": {"train": 1, "valid": 1, "test": 1},
-    "MNLI_unmatched": {"train": 1, "valid": 1, "test": 1},
-    "MRPC": {"train": 1, "valid": 1, "test": 1},
-    "QNLI": {"train": 1, "valid": 1, "test": 1},
-    "QQP": {"train": 1, "valid": 1, "test": 1},
-    "RTE": {"train": 1, "valid": 1, "test": 1},
-    "SNLI": {"train": 1, "valid": 1, "test": 1},
-    "SST-2": {"train": 1, "valid": 1, "test": 1},
-    "STS-B": {"train": 1, "valid": 1, "test": 1},
-    "WNLI": {"train": 1, "valid": 1, "test": 1},
-}
-
-LABEL_MAPPING = {
-    "CoLA": {"1": 1, "0": 2},
-    "MNLI": {"entailment": 1, "contradiction": 2, "neutral": 3},
-    "MNLI_matched": {"entailment": 1, "contradiction": 2, "neutral": 3},
-    "MNLI_unmatched": {"entailment": 1, "contradiction": 2, "neutral": 3},
-    "MRPC": {"1": 1, "0": 2},
-    "QNLI": {"entailment": 1, "not_entailment": 2},
-    "QQP": {"1": 1, "0": 2},
+SuperGLUE_LABEL_MAPPING = {
+    "CB": {"entailment": 1, "contradiction": 2, "neutral": 3},
+    "COPA": {0: 1, 1: 2},
     "RTE": {"entailment": 1, "not_entailment": 2},
-    "SNLI": {"entailment": 1, "contradiction": 2, "neutral": 3},
-    "SST-2": {"1": 1, "0": 2},
-    "STS-B": None,
-    "WNLI": {"1": 1, "0": 2},
+    #"RTE": {True: 1, False: 2},
+    #"RTE": {0: 1, 1: 2},
+    "MRPC": {True: 1, False: 2},
+    "WiC": {True: 1, False: 2},
+    "WSC": {True: 1, False: 2},
+    "MultiRC": {True: 1, False: 2},
+    "SWAG": {0: 1, 1: 2, 2: 3, 3: 4},
+    "SST": {0: 1, 1: 2},
+    "QNLI": {"entailment": 1, "not_entailment": 2},
+    "WNLI": {0: 1, 1: 2},
 }
 
-METRIC_MAPPING = {
-    "CoLA": ["matthews_correlation"],
-    "MNLI": ["accuracy"],
-    "MNLI_matched": ["accuracy"],
-    "MNLI_unmatched": ["accuracy"],
-    "MRPC": ["accuracy_f1"],
-    "QNLI": ["accuracy"],
-    "QQP": ["accuracy_f1"],
+SuperGLUE_LABEL_INVERSE = {}
+for task, mapping in SuperGLUE_LABEL_MAPPING.items():
+    SuperGLUE_LABEL_INVERSE[task] = {v: k for k, v in mapping.items()}
+
+SuperGLUE_TASK_METRIC_MAPPING = {
+    "CB": ["accuracy"],
+    "COPA": ["accuracy"],
+    "MultiRC": ["f1"],
+    "MRPC": ["accuracy"],
     "RTE": ["accuracy"],
-    "SNLI": ["accuracy"],
-    "SST-2": ["accuracy"],
-    "STS-B": ["pearson_spearman"],
+    "WiC": ["accuracy"],
+    "WSC": ["accuracy"],
+    "SWAG": ["accuracy"],
+    "SST": ["accuracy"],
+    "QNLI": ["accuracy"],
     "WNLI": ["accuracy"],
 }
