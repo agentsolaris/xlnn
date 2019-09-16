@@ -1,8 +1,8 @@
 from functools import partial
 
 import torch.nn.functional as F
-from emmental.scorer import Scorer
-from emmental.task import EmmentalTask
+from snorkel.mtl.scorer import Scorer
+from snorkel.mtl.task import Task
 from modules.xlnet_module import XLNetModule, XLNetLastCLSModule
 from task_config import LABEL_MAPPING, METRIC_MAPPING
 from torch import nn
