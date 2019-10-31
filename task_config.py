@@ -26,7 +26,8 @@ SuperGLUE_LABEL_MAPPING = {
     "WSC": {True: 1, False: 2},
     "MultiRC": {True: 1, False: 2},
     "SWAG": {0: 1, 1: 2, 2: 3, 3: 4},
-    "SST": {0: 1, 1: 2},
+    #"SST": {0: 1, 1: 2},
+    "SST": {0: 1, 1: 2, 2: 3, 4: 5, 5: 6},
     "QNLI": {"entailment": 1, "not_entailment": 2},
     "WNLI": {0: 1, 1: 2},
 }
